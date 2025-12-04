@@ -2,6 +2,8 @@
 library(TCGAbiolinks)
 library(SummarizedExperiment)
 
+#GENERAL WORKFLOW FOR TCGAbiolinks
+
 query <- GDCquery(
   project        = "TCGA-LUAD",
   data.category  = "Transcriptome Profiling",
@@ -13,6 +15,7 @@ query <- GDCquery(
 GDCdownload(query)
 #fix the raw files
 se <- GDCprepare(query)
+#SummarizedExperiment 
 #we are doing this to prepare the data for analysis in SampleNetwork QC module, which
 #requires two input files: one with the feature activity (gene expression data) and the other containing the sample information)
 #data needs to be log_2 transformed prior to analysis
