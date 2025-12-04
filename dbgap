@@ -1,3 +1,4 @@
+
 library(TCGAbiolinks)
 library(SummarizedExperiment)
 
@@ -14,3 +15,11 @@ GDCdownload(query)
 se <- GDCprepare(query)
 #we are doing this to prepare the data for analysis in SampleNetwork QC module, which
 #requires two input files: one with the feature activity (gene expression data) and the other containing the sample information)
+#data needs to be log_2 transformed prior to analysis
+datExpr = log2(expr+1)
+pheno   <- as.data.frame(colData(se))
+
+# Build sampleInfo from pheno (barcodes, disease, sex, etc.)
+# Align sampleInfo rows with datExpr columns
+# Create groupLabels (Tumor vs Normal)
+
