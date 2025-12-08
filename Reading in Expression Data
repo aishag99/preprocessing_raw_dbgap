@@ -2,35 +2,45 @@
 install.packages(c("tidyverse", "data.table", "arrow", "duckdb"))
 #https://hbs-rcs.github.io/large_data_in_R/
 library(data.table)
-datE <- fread("C:\\Users\\9aish\\Documents\\TCGA_LUAD_expression_matrix_for_SampleNetwork.csv")
-datS <- fread("C:\\Users\\9aish\\Documents\\TCGA_LUAD_sampleInfo_for_SampleNetwork.csv")
+datE <- fread("C:\\Users\\9aish\\Downloads\\TCGA\\TCGA_LUAD_expression_matrix_for_SampleNetwork.csv")
+datS <- fread("C:\\Users\\9aish\\Downloads\\TCGA\\TCGA_LUAD_sampleInfo_for_SampleNetwork.csv")
 
-#readLines("C:\\Users\\9aish\\Downloads\\TCGA\\TCGA_LUAD_sampleInfo_for_SampleNetwork.csv", n = 5)
-#five <- names("C:\\Users\\9aish\\Downloads\\TCGA\\TCGA_LUAD_expression_matrix_for_SampleNetwork.csv")[1:5]
 
-all(datS$Label==colnames(datE)[3:203])
+all(datS$Sample_Label == colnames(datE)[2:ncol(datE)])
+
+
+# to avoid any errors
+# if you used fread()
+datE <- as.data.frame(datE)   # or: data.table::setDF(datE)
+datS <- as.data.frame(datS) 
 
 SampleNetwork(
-datExprT=datE,
-method1="correlation",
-impute1=FALSE,
-subset1=NULL,
-skip1=2,
-indices1=list(c(3:203)),
-sampleinfo1=datS,
-subgroup1=17,
-samplelabels1=3,
-grouplabels1=18,
-fitmodels1=TRUE,
-whichmodel1="multivariate",
-whichfit1="pc1",
-btrait1=c(5,6,7,11,12,16,15),
-trait1=c(7),
-asfactors1=c(5,6,7,12,15,16),
-projectname1="TCGA-LUAD",
-cexlabels1=0.7,
-normalize1=TRUE,
-replacenegs1=FALSE,
-exportfigures1=TRUE,
-verbose=TRUE
+  datExprT      = datE, 
+  method1       = "correlation", 
+  impute1       = FALSE,
+  subset1       = NULL,
+  skip1         = 1,
+  indices1      = list(2:ncol(datE)),      # all 601 samples
+
+  sampleinfo1   = datS,
+  subgroup1     = NULL,
+  samplelabels1 = 1,                       # Sample_Label
+  grouplabels1  = which(names(datS)=="Group"),
+
+  fitmodels1    = TRUE,
+  whichmodel1   = "multivariate",
+  whichfit1     = "pc1",
+
+  # 3=Sex, 4=Tumor_Stage, 5=Tumor_Type
+  btrait1       = c(3,4,5),
+  trait1        = c(5),                   # main trait = Tumor_Type
+  asfactors1    = c(3,4,5),
+
+  projectname1  = "TCGA-LUAD",
+  cexlabels1    = 0.7,
+  normalize1    = TRUE,
+  replacenegs1  = FALSE,
+  exportfigures1 = TRUE,
+  verbose       = TRUE
 )
+
