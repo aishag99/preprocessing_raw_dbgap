@@ -15,3 +15,8 @@ Gene Expression Quantification	gives you numerical expression columns
 STAR – Counts	                  enforces a consistent counting workflow so the matrix is valid.
 Method 2 to download files:
 rawfiles
+
+
+Difference between Landi and Collison (GEO data and dbgap data)
+Landi: Affymetrix Human Genome U133A Array (GPL96), Expression profiling by array"
+Collison: Bulk RNA seq via Illumina HiSeq 2000 ,  expression profiling performed via RNA sequencing
