@@ -20,3 +20,4 @@ rawfiles
 Difference between Landi and Collison (GEO data and dbgap data)
 Landi: Affymetrix Human Genome U133A Array (GPL96), Expression profiling by array"
 Collison: Bulk RNA seq via Illumina HiSeq 2000 ,  expression profiling performed via RNA sequencing
+<img width="952" height="907" alt="image" src="https://github.com/user-attachments/assets/a6161d71-d10c-4884-9931-692649a5e399" />
