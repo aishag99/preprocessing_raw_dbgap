@@ -1,1 +1,37 @@
+- GENES with 0 variance, exclude them
+- determine what to divide into- primary, etc or by stages
+#i only have 16GB RAM so I need to run this in iterations
 
+
+
+FindModules(
+projectname="TCGA_LUAD_adenocarcinoma", ## provide a brief but descriptive bame
+expr=datE, ## expression matrix
+geneinfo=c(1), ## number of columns of metadata in expr  matrix
+sampleindex=c(2:602), ## vector denoting columns with sample data
+samplegroups=NULL,
+subset=NULL, ## restrict FM to a subset of features (genes / probes)?  as with SampleNetwork, input is a logical vector.  Here, we use all.
+simMat=NULL, ## ignore
+saveSimMat=FALSE, ## ignore
+simType="Bicor", ## similarity type; default = biweight midcorrelation
+beta=1, ## ignore
+overlapType="None", ## ignore
+TOtype="signed", ## ignore
+TOdenom="min", ## ignoregv
+MIestimator="mi.mm", ## ignore
+MIdisc="equalfreq", ## ignore
+signumType="rel", ## ignore
+iterate=TRUE, ## ignore
+signumvec=c(.999,.99,.98,.97,.96,.95,.9), ## vector of quantiles to set hard thresholds for module identification; 0.95 = look for modules in top 5% of all bicors
+minsizevec=c(8,10,12,15,20), ## vector of minimum module sizes; FM will build networks for all possible combinations of signumvec and minsizevec (here, 7 x 5 = 35 networks)
+merge.by="ME", ## ignore
+merge.param=0.9, ## merging parameter - will merge modules whose eigengenes (PC1) are correlated above this threshold, starting with max until none are left
+export.merge.comp=T, ## ignore
+signum=NULL, ## ignore
+minSize=NULL, ## ignore
+ZNCcut=2, ## ignore
+calcSW=FALSE, ## ignore
+loadTree=FALSE, ## ignore
+writeKME=TRUE, ## ignore
+calcBigModStat=FALSE ## ignore
+)
