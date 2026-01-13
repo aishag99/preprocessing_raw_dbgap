@@ -2,20 +2,23 @@
 - determine what to divide into- primary, etc or by stages
 #i only have 16GB RAM so I need to run this in iterations
 
-
+#conditionally drop rows
+ TCGA_primary <- datS[(datS$Tumor_Type %in% "primary"),]
+ dim(TCGA_primary)
+[1] 453   6
 
 FindModules(
-projectname="TCGA_LUAD_adenocarcinoma", ## provide a brief but descriptive bame
+projectname="TCGA_LUAD_primary", ## provide a brief but descriptive bame
 expr=datE, ## expression matrix
 geneinfo=c(1), ## number of columns of metadata in expr  matrix
-sampleindex=c(2:602), ## vector denoting columns with sample data
+sampleindex=c(2:453), ## vector denoting columns with sample data
 samplegroups=NULL,
 subset=NULL, ## restrict FM to a subset of features (genes / probes)?  as with SampleNetwork, input is a logical vector.  Here, we use all.
 simMat=NULL, ## ignore
 saveSimMat=FALSE, ## ignore
 simType="Bicor", ## similarity type; default = biweight midcorrelation
 beta=1, ## ignore
-overlapType="None", ## ignore
+overlapType="None", ## ignoret
 TOtype="signed", ## ignore
 TOdenom="min", ## ignoregv
 MIestimator="mi.mm", ## ignore
